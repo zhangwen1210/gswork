@@ -20,4 +20,22 @@ public interface QuestionMapper {
     Question selectByIm(String im_number);
 
     List<Question> getAll();
+
+    List<Question> getByIm(String im_number);
+
+    List<Question> getByRm(String rm_number);
+
+    List<Question> getByImMohu(String im_number);
+
+    int getQuestionTotal();
+
+    int getTodayAdd();
+
+    int getQuestionEnd();
+
+    int getQuestionIng();
+
+    boolean finishquestion(String imNumber);
+
+    List<Question> getMyZaibanQuestion(String lrry);
 }

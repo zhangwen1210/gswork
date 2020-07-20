@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>问题记录平台</title>
+    <title>我的在办问题</title>
     <base th:href="@{/}">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -40,10 +40,10 @@
                         <li>
                             <a href="#" th:href="@{/gswork/question/}">新建问题关系</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#" th:href="@{/gswork/questionlist/}">全部问题</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#" th:href="@{/gswork/myzaiban/}">我的在办</a>
                         </li>
                     </ul>
@@ -75,23 +75,9 @@
             <div class="row">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h3>问题记录</h3>
+                        <h3>处理中问题</h3>
                     </div>
                     <div class="ibox-content">
-                        <div class="row">
-                            <form action="#" method="post" th:action="@{/gswork/getbyimhumber}">
-                                <div class="col-sm-4">
-                                    <div class="input-group">
-                                        <input name="im_number" type="text" placeholder="IM单号"
-                                               class="input-sm form-control" required="required"> <span
-                                            class="input-group-btn">
-										<button type="submit" class="btn btn-sm btn-primary">查询</button>
-									</span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <br/>
                         <div class="row">
                             <table class="table table-bordered">
                                 <thead>
@@ -102,25 +88,22 @@
                                     <th>提单人</th>
                                     <th>录入日期</th>
                                     <th>状态</th>
-                                    <!--<th>操作</th>-->
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="question,iterStat:${questionList}">
+                                <tr th:each="question,iterStat:${zaibans}">
                                     <td th:text="${question.imNumber}">Mark</td>
                                     <td th:text="${question.rmNumber}">Otto</td>
                                     <td th:text="${question.title}">@mdo</td>
                                     <td th:text="${question.lrry}">@mdo</td>
                                     <td th:text="${#dates.format(question.lrrq, 'yyyy-MM-dd HH:mm:ss')}">@mdo</td>
                                     <td th:text="${question.status}">@mdo</td>
-                                    <!--<td>
-                                        <button th:if="${session.loginUser.zwxm eq question.lrry && question.status eq '处理中'}" type="button" th:id="${question.imNumber}" class="btn btn-primary btn-xs"
-                                                th:onclick="deleteFenlei([[${question.imNumber}]]);">处理完毕
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-xs"
+                                                th:onclick="finishquestion([[${question.imNumber}]]);">处理完毕
                                         </button>
-                                        <button disabled="true" th:if="${session.loginUser.zwxm ne question.lrry}" type="button" class="btn btn-primary btn-xs"
-                                                th:onclick="deleteFenlei([[${question.imNumber}]]);">处理完毕
-                                        </button>
-                                    </td>-->
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -180,7 +163,7 @@
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 
 <script>
-    function deleteFenlei(q_imNumber){
+    function finishquestion(q_imNumber){
         // alert(q_imNumber);
         swal({
             title: "确定关单？",
@@ -202,7 +185,20 @@
                 success: function(resp){  /* 已经将服务器返回的数据转成 JS对象 */
                     console.log(resp);
                     if (resp.reason){
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        swal(
+                            {
+                                title: "成功!",
+                                text: "单子已完成",
+                                type: "success",
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "确定",
+                                closeOnConfirm: false,
+                                closeOnCancel: false
+                            },
+                            function (isConfirm) {
+                                window.location.reload(true);
+                            }
+                        );
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown){

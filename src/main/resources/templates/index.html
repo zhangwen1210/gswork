@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>问题记录平台</title>
+    <title>首页</title>
     <base th:href="@{/}">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -41,6 +41,9 @@
 						<li>
 							<a href="#" th:href="@{/gswork/questionlist/}">全部问题</a>
 						</li>
+                        <li>
+                            <a href="#" th:href="@{/gswork/myzaiban/}">我的在办</a>
+                        </li>
 					</ul>
 				</li>
             </ul>
@@ -59,7 +62,7 @@
                         <span class="m-r-sm text-muted welcome-message">欢迎使用</span>
                     </li>
                     <li>
-                        <a href="login.html">
+                        <a href="login.html" th:href="@{/gswork/logout/}">
                             <i class="fa fa-sign-out"></i> 退出登录
                         </a>
                     </li>
@@ -75,7 +78,7 @@
                             <span class="label label-success pull-left">问题总数</span>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">400</h1>
+                            <h1 class="no-margins" th:text="${question_total}">400</h1>
                         </div>
                     </div>
                 </div>
@@ -85,7 +88,7 @@
                             <span class="label label-info pull-left">今日新增</span>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">27</h1>
+                            <h1 class="no-margins" th:text="${today_add}">27</h1>
                         </div>
                     </div>
                 </div>
@@ -95,7 +98,7 @@
                             <span class="label label-primary pull-left">已完结</span>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">106,120</h1>
+                            <h1 class="no-margins" th:text="${question_end}">106,120</h1>
                         </div>
                     </div>
                 </div>
@@ -105,7 +108,7 @@
                             <span class="label label-danger pull-left">处理中</span>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">80,600</h1>
+                            <h1 class="no-margins" th:text="${question_ing}">80,600</h1>
                         </div>
                     </div>
                 </div>

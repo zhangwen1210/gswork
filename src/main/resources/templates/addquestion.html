@@ -43,6 +43,9 @@
                         <li>
                             <a href="#" th:href="@{/gswork/questionlist/}">全部问题</a>
                         </li>
+                        <li>
+                            <a href="#" th:href="@{/gswork/myzaiban/}">我的在办</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -61,7 +64,7 @@
                         <span class="m-r-sm text-muted welcome-message">欢迎使用</span>
                     </li>
                     <li>
-                        <a href="login.html">
+                        <a href="login.html" th:href="@{/gswork/logout/}">
                             <i class="fa fa-sign-out"></i> 退出登录
                         </a>
                     </li>

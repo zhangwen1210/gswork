@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSPINIA | Login</title>
+    <base th:href="@{/}">
     <!--<base th:href="@{/}">-->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -18,7 +19,7 @@
         <div>
             <h1 class="logo-name">IN+</h1>
         </div>
-        <h3>问题记录平台</h3>
+        <h3>问题记录</h3>
         <form class="m-t" role="form" action="index.html" method="post" th:action="@{/login}" th:object="${user}">
             <div class="form-group">
                 <input th:field="*{username}" type="text" class="form-control" placeholder="Username" required="" />

@@ -1,6 +1,7 @@
 package com.servyou.gswork.controller;
 
 import com.servyou.gswork.po.User;
+import com.servyou.gswork.service.QuestionService;
 import com.servyou.gswork.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class IndexController {
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuestionService questionService;
 
     /**
      * 进入登录页
@@ -48,8 +51,12 @@ public class IndexController {
         }else {
             logger.info("登录成功！登录用户名："+user.getUsername());
             request.getSession().setAttribute("loginUser",loginUser);
+            // 分别查询首页的统计值： 问题总数，今日新增，已完结，处理中
+            questionService.getIndexNumber(model);
             return "index";
         }
     }
+
+
 
 }

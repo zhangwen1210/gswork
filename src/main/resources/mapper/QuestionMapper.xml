@@ -123,6 +123,48 @@
   <select id="getAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
+    from question order by lrrq desc
+  </select>
+  <select id="getByIm" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
     from question
+    where im_number = #{im_number,jdbcType=VARCHAR}
+  </select>
+  <select id="getByRm" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from question
+    where rm_number = #{rm_number,jdbcType=VARCHAR}
+  </select>
+  <select id="getByImMohu" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from question
+    where im_number like concat('%', #{im_number,jdbcType=VARCHAR} ,'%')
+  </select>
+  <select id="getQuestionTotal" resultType="java.lang.Integer">
+    select count(*) from question
+  </select>
+  <select id="getTodayAdd" resultType="java.lang.Integer">
+    select count(*) from question where to_days(lrrq) = to_days(now())
+  </select>
+  <select id="getQuestionEnd" resultType="java.lang.Integer">
+    select count(*) from question where status='已完结'
+  </select>
+  <select id="getQuestionIng" resultType="java.lang.Integer">
+    select count(*) from question where status='处理中'
+  </select>
+  <update id="finishquestion" parameterType="java.lang.String">
+    update question
+    set status = '已完结'
+    where im_number = #{im_number,jdbcType=VARCHAR}
+  </update>
+  <select id="getMyZaibanQuestion" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from question
+    where lrry = #{lrry,jdbcType=VARCHAR}
+    and status = '处理中'
   </select>
 </mapper>

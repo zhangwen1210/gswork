@@ -8,7 +8,8 @@ spring:
   datasource:
     username: zhangwen
     password: zhangwen
-    url: jdbc:mysql://localhost:3306/gswork?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    #url: jdbc:mysql://151.16.140.139:3306/gswork?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/gswork?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     #配置数据源类型
     type: com.alibaba.druid.pool.DruidDataSource

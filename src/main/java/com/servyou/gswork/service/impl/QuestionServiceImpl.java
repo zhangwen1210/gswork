@@ -6,6 +6,7 @@ import com.servyou.gswork.po.Question;
 import com.servyou.gswork.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.Date;
 import java.util.List;
@@ -53,5 +54,43 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Question> getAll() {
         return questionMapper.getAll();
+    }
+
+    @Override
+    public List<Question> getByIm(String im_number) {
+        return questionMapper.getByIm(im_number);
+    }
+
+    @Override
+    public List<Question> getByRm(String rm_number) {
+        return questionMapper.getByRm(rm_number);
+    }
+
+    @Override
+    public List<Question> getByImMohu(String im_number) {
+        return questionMapper.getByImMohu(im_number);
+    }
+
+    @Override
+    public void getIndexNumber(Model model) {
+        // 问题总数，今日新增，已完结，处理中
+        int question_total = questionMapper.getQuestionTotal();
+        int today_add = questionMapper.getTodayAdd();
+        int question_end = questionMapper.getQuestionEnd();
+        int question_ing = questionMapper.getQuestionIng();
+        model.addAttribute("question_total", question_total);
+        model.addAttribute("today_add", today_add);
+        model.addAttribute("question_end", question_end);
+        model.addAttribute("question_ing", question_ing);
+    }
+
+    @Override
+    public boolean finishquestion(String imNumber) {
+        return questionMapper.finishquestion(imNumber);
+    }
+
+    @Override
+    public List<Question> getMyZaibanQuestion(String zwxm) {
+        return questionMapper.getMyZaibanQuestion(zwxm);
     }
 }
